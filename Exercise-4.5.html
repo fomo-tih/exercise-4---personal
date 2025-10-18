@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exercise 4.5 — D3 Binding & Drawing with Data</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#chart">Skip to chart</a>
+
+  <header class="wrap">
+    <h1>Exercise 4.5 — D3 Binding & drawing with data</h1>
+          <a class="back-home-btn" href="index.html" aria-label="Back to Home">← Back to Home</a>
+    <p class="sub">Bind → width/height → spacing (no scales yet)</p>
+  </header>
+
+  <main class="wrap">
+    <section aria-label="Bar chart">
+      <svg id="chart" role="img" aria-describedby="desc"></svg>
+      <p id="desc" class="vis-note">
+        Horizontal bars drawn from an in-memory dataset prepared in Exercise 4.4.
+        Bars use constant height and spacing; width equals the raw count value.
+      </p>
+    </section>
+
+    <details class="code-notes">
+      <summary>What this demonstrates (matches the brief)</summary>
+      <ul>
+        <li>Bind data to <code>&lt;rect&gt;</code> with <code>.data().join("rect")</code></li>
+        <li>Add a data-driven <code>class</code> (e.g., <code>bar bar-1005</code>)</li>
+        <li>Set <strong>width</strong> from <code>d.count</code>, <strong>height</strong> constant</li>
+        <li>Compute <strong>x</strong> and <strong>y</strong> to space bars out</li>
+      </ul>
+    </details>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="Ex4-5.js"></script>
+
+        <footer>
+    2025 - fomo.tih | GenAI Acknowledgement
+  </footer>
+</body>
+</html>

@@ -1,0 +1,647 @@
+/* =========================================================
+   Dark Neon UI — Base Styles
+   ---------------------------------------------------------
+   - Keeps your original look & classes (no HTML changes)
+   - Adds accessiblity (focus-visible), motion/contrast prefs
+   - Fixes: anchors hub actions to card
+   ======================================================= */
+
+/* ---------- Theme tokens ---------- */
+:root{
+  /* colors */
+  --bg:        #000000;
+  --panel:     #0a0a0a;
+  --text:      #e6ecff;
+  --muted:     #8da1c0;
+  --accent:    #7aa2ff;
+  --border:    #202020;
+
+  /* metrics */
+  --radius: 16px;
+  --gap:    18px;
+
+  /* effects */
+  --shadow-card: 0 0 24px rgba(0,0,0,.55);
+  --shadow-stage: 0 20px 40px rgba(0,0,0,.6);
+}
+
+/* ---------- Resets / base ---------- */
+*{ box-sizing: border-box }
+html, body{ height:100% }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial;
+}
+a{ color:var(--accent); text-decoration:none }
+a:hover{ text-decoration:underline }
+
+/* containers */
+.container, .hub-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px;
+}
+
+/* ---------- Keyboard focus ---------- */
+:where(a, button, .hub-btn, .hub-nav-item):focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:10px;
+}
+
+/* (optional) skip link if you add it in HTML */
+.skip-link{
+  position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden
+}
+.skip-link:focus{
+  position:static;width:auto;height:auto;
+  padding:.5rem .75rem;background:#111;border:1px solid var(--accent);
+  border-radius:8px
+}
+
+/* =========================================================
+   HUB (index)
+   ======================================================= */
+.hub-body{ background:#000; overflow-x:hidden; position:relative }
+
+/* background stars */
+.hub-bg{ position:fixed; inset:0; z-index:-1; background:#000 }
+.hub-stars{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(2px 2px at 10% 20%,#fff 85%,transparent 86%),
+    radial-gradient(2px 2px at 30% 80%,#fff 85%,transparent 86%),
+    radial-gradient(1.5px 1.5px at 70% 35%,#fff 85%,transparent 86%),
+    radial-gradient(1.5px 1.5px at 85% 55%,#fff 85%,transparent 86%),
+    radial-gradient(1.5px 1.5px at 50% 10%,#fff 85%,transparent 86%),
+    radial-gradient(1.5px 1.5px at 15% 65%,#fff 85%,transparent 86%);
+  opacity:.22;
+  filter:drop-shadow(0 0 2px #8ab4ff);
+  animation:twinkle 6s ease-in-out infinite;
+}
+@keyframes twinkle{ 0%,100%{opacity:.18} 50%{opacity:.30} }
+
+/* header / breadcrumb */
+.hub-header{ border-bottom:1px solid var(--border) }
+.hub-title-row{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+}
+.hub-title-row h1{ margin:0; font-weight:900 }
+.hub-title-row h1 span{ color:var(--accent) }
+.hub-top-nav .hub-nav-item{
+  display:inline-block; padding:8px 10px;
+  border-radius:10px; background:#0f0f0f; border:1px solid #1d1d1d
+}
+.hub-top-nav .hub-nav-item:hover{ background:#151515 }
+.hub-subtitle{ margin:.25rem 0 0; color:var(--muted) }
+
+/* grid of cards */
+.hub-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+  gap:var(--gap);
+  padding-block:24px;
+}
+.hub-card{
+  position:relative; /* anchor .hub-actions */
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 16px 56px;
+  box-shadow:var(--shadow-card);
+  transition:transform .15s ease, border-color .15s ease;
+}
+.hub-card:hover{ transform:translateY(-4px); border-color:#2a2a2a }
+.hub-card-head{ display:flex; align-items:center; gap:10px; margin-bottom:6px }
+.hub-icon{
+  width:36px; height:36px; display:grid; place-items:center;
+  border-radius:10px; background:#111; border:1px solid #222
+}
+.hub-card h2{ margin:0; font-size:18px }
+.hub-card p{ margin:.4rem 0; color:var(--muted) }
+.hub-tag{ margin-left:auto; font-size:12px; font-weight:700; color:var(--accent) }
+
+.hub-actions{ position:absolute; bottom:10px; right:14px }
+.hub-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:36px; min-width:44px;
+  background:#111; border:1px solid var(--accent);
+  color:var(--text); padding:6px 10px; border-radius:10px; font-weight:700;
+}
+.hub-btn:hover{ background:#1a1a1a }
+.hub-btn:active{ transform:translateY(1px) }
+
+footer{
+  border-top:1px solid var(--border);
+  padding:20px 0; text-align:center; color:var(--muted); font-size:14px
+}
+
+
+/* =========================================================
+   Exercise pages (shared)
+   ======================================================= */
+.page{ background:#000; color:var(--text) }
+
+.site-header{
+  padding:24px; border-bottom:1px solid var(--border)
+}
+.site-header h1{ margin:0 0 4px; font-weight:900 }
+.site-header p{ margin:0; color:var(--muted) }
+
+/* demo stage frame */
+.stage{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:12px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-stage);
+  overflow:hidden;
+}
+.stage.small{ max-width:900px }
+
+/* code chip */
+code{
+  background:#0f0f0f; border:1px solid #1b1b1b;
+  padding:2px 6px; border-radius:6px; color:#dbe7ff; line-height:1.35;
+}
+
+/*back home btn*/
+
+.back-home-btn{
+  position: absolute;
+  top: 24px;           /* align with header padding */
+  right: 24px;         /* sit on the right side */
+  background:#111;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  padding:6px 14px;
+  border-radius:10px;
+  font-weight:600;
+  text-decoration:none;
+  transition:all .2s ease;
+}
+.back-home-btn:hover {
+  background: var(--accent);
+  color: #000;
+  transform: translateY(-2px);
+}
+.back-home-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   Responsive
+   ======================================================= */
+@media (max-width: 720px){
+  .hub-title-row{ flex-direction:column; align-items:flex-start }
+}
+@media (max-width: 420px){
+  .hub-grid{ grid-template-columns:1fr; gap:14px }
+  .container, .hub-wrap{ padding:16px }
+}
+
+/* =========================================================
+   User Preferences
+   ======================================================= */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hub-stars{ animation:none; opacity:.22 }
+  *{ scroll-behavior:auto }
+}
+
+/* Higher contrast */
+@media (prefers-contrast: more){
+  :root{
+    --border:#2a2a2a;
+    --muted:#a7b9d6;
+  }
+  .hub-card{ box-shadow:0 0 0 1px var(--border), 0 6px 18px rgba(0,0,0,.6) }
+}
+
+/* Forced Colors (Windows High Contrast) */
+@media (forced-colors: active){
+  .hub-card, .stage, code,
+  .hub-btn, .hub-nav-item{ border:1px solid CanvasText }
+  .hub-btn, .hub-nav-item{ background:Canvas; color:CanvasText }
+  .hub-stars{ display:none }
+}
+/* =========================================================
+   Exercise 4.2 — page-specific styles
+   - Matches your dark neon theme (no bluish tint)
+   - No HTML changes required beyond what's in Ex4-2.html
+   ======================================================= */
+
+/* Header layout (align title + back button) */
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+/* Keep the title white; accent the "D3" word in the subtitle */
+.site-header h1{ color:var(--text); letter-spacing:.4px }
+.site-header p.muted{ color:var(--muted) }
+.site-header p.muted strong{ color:var(--accent) }
+
+/* Back-to-home button in header */
+.back-home-btn{
+  background:#0f0f0f;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  padding:6px 14px;
+  border-radius:10px;
+  font-weight:700;
+  text-decoration:none;
+  transition:all .2s ease;
+}
+.back-home-btn:hover{ background:var(--accent); color:#000; transform:translateY(-1px) }
+.back-home-btn:active{ transform:translateY(0) }
+
+/* Panels (neutral dark, no blue tint) */
+.stage{
+  background: linear-gradient(180deg, #0b0b0d, #0a0a0a); /* neutral gray-black */
+  border:1px solid #171717;
+  border-radius:20px;
+  box-shadow:0 12px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.03);
+  padding:20px 22px;
+}
+.stage + .stage{ margin-top:28px }
+
+/* Section headings */
+.stage h2{
+  margin:0 0 14px;
+  font-weight:900;
+  letter-spacing:.3px;
+  color:var(--text);
+  text-shadow:0 0 12px rgba(122,162,255,.12);
+  border-bottom:1px dashed #262626;
+  padding-bottom:8px;
+}
+
+/* Step 2/3 inner box where D3 appends text */
+#play{
+  background:#111;                 /* dark neutral (no blue) */
+  border:1px solid #222;
+  border-radius:14px;
+  padding:14px 16px;
+  color:#cfe1ff;
+  font-weight:600;
+}
+
+/* Step 4 SVG frame */
+#scene{
+  display:block;
+  margin:14px auto 6px;            /* center in card */
+  width:100%;
+  max-width:720px;
+  height:260px;                     /* keep height consistent */
+  background:
+    radial-gradient(1000px 700px at -15% -10%, rgba(255,255,255,.04) 0, transparent 40%),
+    #0f1012;                        /* very dark neutral */
+  border:1px solid #222;
+  border-radius:16px;
+}
+
+/* Any text drawn inside the SVG */
+#scene text{
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  fill:#cfe1ff;
+}
+
+/* D3 rectangle polish (your JS controls size/position/fill) */
+#scene rect{
+  stroke:#bcd2ff;
+  stroke-width:2px;
+  rx:6; ry:6;                       /* rounded corners if not set in JS */
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.55));
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px){
+  .header-row{ flex-direction:column; align-items:flex-start }
+  .back-home-btn{ align-self:flex-end }
+  #scene{ height:220px }
+}
+/* =========================================================
+   Exercise 4.3 — page-specific styles
+   ======================================================= */
+
+   /* ===== Trim page height for Exercise 4.3 ===== */
+html, body { height: auto; min-height: 0; margin: 0; padding: 0; }
+
+.page { height: auto; min-height: 0; display: block; }
+
+.site-header { margin-bottom: 8px; }          /* tighten header/footer spacing */
+.container    { padding-bottom: 0; margin-bottom: 0; }
+.stage        { margin: 8px auto 0; padding-bottom: 12px; }
+
+/* Keep header consistent with site */
+.header-row{
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:12px;
+}
+.site-header h1
+{ color:var(--text); 
+  letter-spacing:.3px 
+}
+.site-header p.muted strong{ 
+  color:var(--accent) 
+}
+
+.back-home-btn{
+  background:#0f0f0f; 
+  border:1px solid var(--accent); 
+  color:var(--accent);
+  padding:6px 14px; 
+  border-radius:10px;
+   font-weight:700; 
+   text-decoration:none;
+  transition:all .2s ease;
+}
+.back-home-btn:hover{ 
+  background:var(--accent); 
+  color:#000; 
+  transform:translateY(-1px) }
+
+/* STEP 2: responsive container for the SVG (as per brief) */
+.responsive-svg-container{
+  margin-right:auto;
+  margin-left:auto;
+  width:100%;
+  max-width:1200px; /* keep it from stretching too wide */
+}
+
+/* Style the stage panel to match your dark-neon look */
+.stage{
+  background:linear-gradient(180deg,#0b0b0d,#0a0a0a);
+  border:1px solid #171717;
+  border-radius:20px;
+  box-shadow:0 12px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.03);
+  padding:20px 22px;
+}
+.stage h2{
+  margin:0 0 14px; padding-bottom:8px; border-bottom:1px dashed #262626;
+  color:var(--text); font-weight:900; letter-spacing:.3px;
+}
+
+/* Optional: make any SVG inside the container look crisp against the theme */
+.responsive-svg-container svg{
+  background:#0f1012;
+  border:1px solid #222;          /* the “box” the brief mentions */
+  border-radius:14px;
+  width:100%; height: auto;       /* ensures it scales with the container */
+  display:block;
+}
+
+/* Optional polish for shapes */
+.responsive-svg-container rect{
+  stroke:#bcd2ff; stroke-width:2px; rx:6; ry:6;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
+}
+
+/* Responsive tweak */
+@media (max-width:720px){
+  .header-row{ flex-direction:column; align-items:flex-start }
+  .back-home-btn{ align-self:flex-end }
+}
+/* ---- Exercise 4.4 page polish (extends your style.css) ---- */
+:root{
+  --accent:#7aa2ff; 
+  --border:#1a1a1a; 
+  --text:#e6ecff;
+}
+
+/* header + back button */
+.header-row{ 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  gap:12px; 
+  flex-wrap:wrap; 
+}
+.back-home-btn{
+  background:#0f0f0f; 
+  border:1px solid var(--accent); 
+  color:var(--accent);
+  padding:6px 14px; 
+  border-radius:10px; 
+  font-weight:700; 
+  text-decoration:none; 
+  transition:.2s ease;
+}
+.back-home-btn:hover{ 
+  background:var(--accent); 
+  color:#000; 
+  transform:translateY(-1px); 
+}
+
+/* switcher */
+.dataset-switch{ 
+  display:flex; 
+  align-items:center; 
+  gap:10px; 
+  margin:10px 0 16px; 
+}
+.ds-btn{
+  background:#0f1012; 
+  color:#cfe1ff; 
+  border:1px solid #223; 
+  padding:8px 12px;
+  border-radius:10px; 
+  font:600 13px ui-monospace,Menlo,Consolas; 
+  cursor:pointer; 
+  transition:.2s ease;
+}
+.ds-btn:hover{ border-color:#2f3f79 }
+.ds-btn.is-active{ 
+  border-color:var(--accent); 
+  box-shadow:0 0 0 2px rgba(122,162,255,.15) inset; 
+}
+.ds-badge{
+  margin-left:auto; 
+  color:#a9c1ff; 
+  font:700 12px ui-monospace,Menlo,Consolas;
+  padding:6px 10px; 
+  border:1px dashed #2a3355; 
+  border-radius:10px;
+}
+
+/* stage shell */
+.stage{
+  background:linear-gradient(180deg,#0b0b0d,#0a0a0a);
+  border:1px solid var(--border); 
+  border-radius:16px;
+  box-shadow:0 12px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.03);
+  padding:18px;
+}
+.stage h2{ 
+  margin:0 0 10px; 
+  color:var(--text); 
+  font-weight:900; 
+  border-bottom:1px dashed #262626; 
+  padding-bottom:8px; 
+}
+
+/* data preview table */
+.data-preview{
+  overflow:auto; 
+  background:#0f1012; 
+  border:1px solid #222; 
+  border-radius:12px;
+}
+.data-preview table{
+  width:100%; 
+  border-collapse:collapse; 
+  min-width:520px;
+  color:#d7e4ff; 
+  font:600 12px/1.4 ui-monospace,Menlo,Consolas;
+}
+.data-preview th, .data-preview td{ 
+  border-bottom:1px solid #1f2335; 
+  padding:10px 12px; 
+  text-align:left; 
+}
+.data-preview th{ 
+  color:#bcd2ff; 
+  background:#0f1422; 
+  position:sticky; 
+  top:0; 
+}
+.data-preview tr:hover td{ background:#10162a }
+
+/* stats */
+.data-stats{
+  margin-top:8px; 
+  padding:10px 12px; 
+  background:#0f1012; 
+  border:1px solid #222; 
+  border-radius:12px;
+  color:#cfe1ff; 
+  font:600 12px ui-monospace,Menlo,Consolas;
+}
+
+/* responsive */
+@media (max-width:720px){
+  .header-row{ flex-direction:column; align-items:flex-start }
+  .ds-badge{ display:none }
+}
+
+
+
+/*Exercise 4.6*/
+:root{
+  --bg:#0b0d10; --fg:#e8f0ff; --ink:#bcd2ff; --accent:#7aa2ff; --bar:#3b82f6;
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font:16px/1.55 system-ui,
+  Segoe UI,Roboto,
+  Ubuntu,Arial,
+  sans-serif}
+
+.wrap{
+  max-width:980px;
+  margin:auto;
+  padding:1.25rem
+}
+h1{
+  margin:.25rem 0 0
+}
+.sub{
+  margin:.25rem 0 1rem;
+  color:var(--ink)
+}
+
+.skip-link{
+  position:absolute;
+  left:-9999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden
+}
+.skip-link:focus{
+  position:fixed;
+  left:1rem;
+  top:1rem;
+  background:#111;
+  border:1px solid var(--accent);
+  border-radius:8px;
+  padding:.5rem .75rem
+}
+
+svg#chart{
+  width:100%; height:420px; display:block;
+  background:#0f1319; border:1px solid #1c2637; border-radius:12px;
+}
+
+.bar{fill:var(--bar)}
+.bar:hover{opacity:.85}
+.vis-note{color:#93a5c7;font-size:.9rem}
+:root{
+  --bg:#0b0d10; --fg:#e8f0ff; --ink:#bcd2ff; --accent:#7aa2ff; --bar:#3b82f6;
+  color-scheme: dark;
+}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
+.wrap{max-width:980px;margin:auto;padding:1.25rem}
+h1{margin:.25rem 0 0}
+.sub{margin:.25rem 0 1rem;color:var(--ink)}
+
+svg#chart{
+  width:100%; height:500px;
+  background:#0f1319; border:1px solid #1c2637; border-radius:12px;
+}
+.bar{fill:var(--bar)}
+.bar:hover{opacity:.85}
+.vis-note{color:#93a5c7;font-size:.9rem}
+
+/*Exercise 4.7*/
+:root{
+  --bg:#0b0d10;--fg:#e8f0ff;--accent:#7aa2ff;--bar:#2e8b57;
+  color-scheme:dark;
+}
+body{margin:0;background:var(--bg);color:var(--fg);
+     font:16px/1.5 system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;}
+.wrap{max-width:960px;margin:auto;padding:1.25rem}
+h1{margin:.25rem 0 0}.sub{margin:.25rem 0 1rem;color:#bcd2ff}
+
+svg#chart{
+  width:100%;height:500px;background:#0f1319;
+  border:1px solid #1c2637;border-radius:12px;
+}
+.bar{
+  fill:var(--bar);
+}
+.bar:hover{
+  opacity:.85
+}
+text{
+  fill:#fff;
+  font-family:"Segoe UI",
+  sans-serif;
+  font-size:13px;
+}
+.controls{
+  display:flex;
+  gap:
+  .5rem;
+  margin:.5rem 0 1rem
+}
+.btn{
+  background:#141820;
+  border:1px solid #243143;border-radius:999px;
+  color:#e8f0ff;padding:.5rem .9rem;
+  cursor:pointer
+}
+.btn:focus-visible{outline:2px solid #7aa2ff;outline-offset:2px}
+.btn:hover{border-color:#31465f}

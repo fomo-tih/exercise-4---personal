@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exercise 4.4 — Load Data from CSV</title>
+
+  <!-- Site-wide styles -->
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+<body class="page">
+  <header class="site-header">
+    <div class="header-row container">
+      <h1>Exercise 4.4 — Load Data from CSV</h1>
+      <a class="back-home-btn" href="index.html" aria-label="Back to Home">← Back to Home</a>
+    </div>
+    <p class="muted container">
+      Load a CSV with <strong>D3</strong>, coerce numeric fields, log results to the console, and preview the data + quick stats below.
+    </p>
+  </header>
+
+  <main class="container">
+    <!-- Dataset switcher -->
+    <section class="dataset-switch" aria-label="Choose dataset">
+      <button class="ds-btn is-active" data-key="tv" aria-pressed="true">TV Brands (EX4.csv)</button>
+      <button class="ds-btn" data-key="wombats" aria-pressed="false">Wombats (Task_2.4_data.csv)</button>
+      <span id="current-ds" class="ds-badge">Current: TV Brands</span>
+    </section>
+
+    <!-- Stage / results -->
+    <section class="stage" aria-label="Data results">
+      <h2>Data preview</h2>
+      <div id="preview" class="data-preview" aria-live="polite"></div>
+
+      <h2 style="margin-top:14px">Quick stats</h2>
+      <div id="stats" class="data-stats" aria-live="polite"></div>
+
+      <p class="note" style="margin-top:12px">
+        Tip: Open <strong>DevTools → Console</strong> to see the full dataset, inferred numeric/categorical columns, and extent values.
+      </p>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="Ex4-4.js"></script>
+
+        <footer>
+    2025 - fomo.tih | GenAI Acknowledgement
+  </footer>
+</body>
+</html>
